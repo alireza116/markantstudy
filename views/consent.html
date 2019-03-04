@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>US Poverty</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
+          integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
+            integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
+            crossorigin=""></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div class="container-fluid">
+        <div >
+            <div id="consent-text" class="container">
+                <h1>Consent to Participate in a Research Study</h1>
+                <ul>
+                    <li>Title of the Project:  Understanding effects of text messages on decision outcomes</li>
+                    <li>Principal Investigator: Alireza Karduni</li>
+                    <li>Co-investigator: Mitra Mostafavi</li>
+                    <li>Faculty Advisor: Doug Markant</li>
+                </ul>
+                <hr>
+                <p>You are invited to participate in a research study.  Participation in this research study is voluntary.  The information provided is to give you key information to help you decide whether or not to participate.  </p>
+                <ul>
+                    <li>The purpose of this study is to understand how much different text messages effect your decision making on specific topics
+                    </li>
+                    <br>
+                    <br>
+                    <li>
+                        for four different topics: <br>
+                        you will first see the topic question,
+                        then you will be asked about your knowledge and stance towards that topic <br>
+                        then you will click through a series of messages, whenever you are ready to make a decision,
+                        <br>
+                        you can do so by clicking decide
+                    </li>
+                    <br>
+                    <br>
+                    <li>You must be age 18 or older to participate in this study.</li>
+                    <li>You are asked to complete a survey asking a series of short general demographic questions. They are not personal or sensitive.</li>
+                    <li>It will take you about 10 minutes to complete the study.</li>
+                    <li>We do not believe that you will experience any risk from participating in this study. <br></li>
+                    <li>
+                        Your privacy will be protected and confidentiality will be maintained to the extent possible. No Identifiable information will be stored along with your responses and all of your responses are anonymous.  We might use the survey data for future research studies and we might share the non-identifiable survey data with other researchers for future research studies without additional consent from you.
+                    </li>
+                    <li>Besides, Amazon MTurk Compensation, you will not benefit personally by participating in this study.  What we learn about how people are motivated may be beneficial to others.
+                    Your privacy will be protected and confidentiality will be maintained to the extent possible. Your responses will be treated as confidential and Responses and IDs will be stored separately in secure computers and access will be only given to the conductors of the study who have approval to access. After your payment is processed, your ID will be deleted from the database.  We might use the survey data for future research studies and we might share the non-identifiable survey data with other researchers for future research studies without additional consent from you.
+                    Participation is voluntary.  You may choose not to take part in the study.  You may start participating and change your mind and stop participation at any time.
+                    If you have questions concerning the study, contact the principal investigator, Alireza Karduni by email at akarduni@uncc.edu.  If you have further questions or concerns about your rights as a participant in this study, contact the Office of Research Compliance at (704) 687-1871 or uncc-irb@uncc.edu.
+                    You may print a copy of this form.  If you are 18 years of age or older, have read and understand the information provided  and freely consent to participate in the study, you may proceed to the survey. </li>
+                    <li>
+                        If you have questions concerning the study, contact the principal investigator, Alireza Karduni by email at akarduni@uncc.edu.  If you have further questions or concerns about your rights as a participant in this study, contact the Office of Research Compliance at (704) 687-1871 or uncc-irb@uncc.edu.
+                    </li>
+                    <li style="color:red">WARNING: DO NOT close your browser or hit the back button during the study until you receive your token after completion of the study. Otherwise your progress will be lost.</li>
+
+                    <!--<li style="color:red">WARNING: DO NOT close your browser or hit the back button during the study until you receive your token after completion of the study and submission to MTurk. Otherwise your progress will be lost and you may not receive your rewards.</li>-->
+                </ul>
+                <button type="submit" class="btn btn-primary" id="consent">Give consent</button>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <script src="/js/article.js"></script> -->
+    <!-- <script src="/js/study.js"></script> -->
+    <script>
+        $("#sidebar").height(function(){
+            return $("html").height();
+        })
+    </script>
+    <script>
+        //    window.location.assign("/consent");
+        $("#consent").click(function(event){
+            event.preventDefault();
+            $.get("/api/consent", function(data, status){
+                console.log(data);
+                window.location.assign("/prestudy");
+            });
+        })
+    </script>
+</body>
+</html>
+

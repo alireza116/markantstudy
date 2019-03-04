@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/prestudy.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Markant Lab Study</title>
+</head>
+<body>
+<div class="container main">
+    <div id="topic">
+        <h2></h2>
+    </div>
+    <div id="prior">
+        <div class="row">
+            <p class="col-10" style="margin:0 auto; font-weight: 500">
+                Please answer these questions before continuing to messages.
+            </p>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <p class="col-10" style="margin:0 auto">
+                How familiar are you with this topic? Not familiar at all (1) to extremely familiar (7).
+            </p>
+        </div>
+        <div class = "row">
+            <fieldset class="form-group col-10" style=" margin:0 auto;">
+                <br>
+                <div class="form-check form-check-inline" style="width:12%">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="knowledge" id="knowledgeRadio1" value="1"> 1
+                    </label>
+                </div>
+                <div class="form-check form-check-inline" style="width:12%">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="knowledge" id="knowledgeRadio2" value="2"> 2
+                    </label>
+                </div>
+                <div class="form-check form-check-inline" style="width:12%">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="knowledge" id="knowledgeRadio3" value="3"> 3
+                    </label>
+                </div>
+                <div class="form-check form-check-inline" style="width:12%">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="knowledge" id="knowledgeRadio4" value="4"> 4
+                    </label>
+                </div>
+                <div class="form-check form-check-inline" style="width:12%">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="knowledge" id="knowledgeRadio5" value="5"> 5
+                    </label>
+                </div>
+                <div class="form-check form-check-inline" style="width:12%">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="knowledge" id="knowledgeRadio6" value="6"> 6
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="knowledge" id="knowledgeRadio7" value="7"> 7
+                    </label>
+                </div>
+            </fieldset>
+
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <p class="col-10" style="margin:0 auto">
+                How decided are you about this topic? decided against (1) to decided for (7).
+            </p>
+        </div>
+        <div class = "row">
+            <fieldset class="form-group col-10" style=" margin:0 auto;">
+                <br>
+                <div class="form-check form-check-inline" style="width:12%">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="decided" id="decidedRadio1" value="1"> 1
+                    </label>
+                </div>
+                <div class="form-check form-check-inline" style="width:12%">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="decided" id="decidedRadio2" value="2"> 2
+                    </label>
+                </div>
+                <div class="form-check form-check-inline" style="width:12%">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="decided" id="decidedRadio3" value="3"> 3
+                    </label>
+                </div>
+                <div class="form-check form-check-inline" style="width:12%">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="decided" id="decidedRadio4" value="4"> 4
+                    </label>
+                </div>
+                <div class="form-check form-check-inline" style="width:12%">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="decided" id="decidedRadio5" value="5"> 5
+                    </label>
+                </div>
+                <div class="form-check form-check-inline" style="width:12%">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="decided" id="decidedRadio6" value="6"> 6
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="decided" id="decidedRadio7" value="7"> 7
+                    </label>
+                </div>
+            </fieldset>
+
+        </div>
+
+    </div>
+    <div id="decisions" class="row">
+        <div id="continue" class="col"><p>Continue</p></div>
+        <!--<div id="decide" class="col"><p>Make a Decision</p></div>-->
+    </div>
+</div>
+<script>
+    $.get("/api/data?topic=1").then(function(data){
+        var question = data["question"];
+        d3.select("#topic").select("h2").text(question);
+
+        var data = []
+
+        d3.select("#continue").on("click",function(){
+
+            var d = $("fieldset").serializeArray();
+            console.log(d);
+            for (var i in d) {
+                data.push(d[i])
+            }
+            $.post("/api/prestudy",data,success=function(result){
+                console.log(result);
+                window.location.assign("/study");
+            });
+            console.log(data)
+//
+
+        })
+    })
+</script>
+</body>
+</html>
