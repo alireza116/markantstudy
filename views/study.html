@@ -14,9 +14,9 @@
 <body>
 <div class="container main">
     <div id="topic"><h2>what do you think?</h2></div>
-    <div id="message">
-        <h2>
-        </h2>
+    <div id="message" >
+        <div class="callout top-left">
+        </div>
     </div>
     <div id="decisions" class="row">
         <div id="continue" class="col"><p>Next Message</p></div>
@@ -26,15 +26,15 @@
 <script>
     var decisions = [];
     $.get("/api/data").then(function(data){
-        var question = data["question"];
-        d3.select("#topic").select("h2").text(question);
+        var question = data["title"];
+        d3.select("#topic").select("h2").text("Topic: " + question);
         var dataEmotion = data["data"].slice();
         dataEmotion.sort(function(a,b){
             return +b["sentiment"] > +a["sentiment"]
         });
 
         var index = 0;
-        var message = d3.select("#message").select("h2");
+        var message = d3.select("#message").select(".callout");
         message.text(dataEmotion[index]["text"]);
         decisions.push(Date.now());
         d3.select("#continue").on("click",function(){

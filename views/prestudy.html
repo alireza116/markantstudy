@@ -16,7 +16,7 @@
     <div id="topic">
         <h2></h2>
     </div>
-    <div id="prior">
+    <div id="prior" class="bg-light">
         <div class="row">
             <p class="col-10" style="margin:0 auto; font-weight: 500">
                 Please answer these questions before continuing to messages.
@@ -74,7 +74,7 @@
         <br>
         <div class="row">
             <p class="col-10" style="margin:0 auto">
-                How decided are you about this topic? decided against (1) to decided for (7).
+                To what extent are you in favor or opposed to the proposal above? completely opposed(1) to completely in favor (7).
             </p>
         </div>
         <div class = "row">
@@ -125,9 +125,32 @@
         <!--<div id="decide" class="col"><p>Make a Decision</p></div>-->
     </div>
 </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Topic Information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $.get("/api/data?topic=1").then(function(data){
-        var question = data["question"];
+        var question = data["title"];
+        d3.select(".modal-body").text(data["info"]);
+        d3.select(".modal-title").text(data["title"]);
+        $("#exampleModal").modal();
         d3.select("#topic").select("h2").text(question);
 
         var data = []

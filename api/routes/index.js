@@ -28,10 +28,10 @@ const responseSchema = new Schema({
     default: Date.now
   },
   questionnaire: Schema.Types.Mixed,
-    prestudy: [Schema.Types.Mixed],
-    study : [Schema.Types.Mixed],
-    decision: [Schema.Types.Mixed],
-  responses: {string: Schema.Types.Mixed},
+  prestudy: [Schema.Types.Mixed],
+  study: [Schema.Types.Mixed],
+  decision: [Schema.Types.Mixed],
+  responses: { string: Schema.Types.Mixed },
   paid: { type: Boolean, Defult: false }
 });
 
@@ -46,14 +46,13 @@ function getGroupString(groupInt) {
   }
 }
 
-
 const Response = mongoose.model("userResponse", responseSchema);
 
 router.get("/api/userinfo", function(req, res) {
   if (req.session.userid) {
     res.json({
       group: req.session.group,
-      token: req.session.userid,
+      token: req.session.userid
     });
   } else {
     res.send("please give consent first");
@@ -63,13 +62,11 @@ router.get("/api/userinfo", function(req, res) {
 router.get("/api/data", function(req, res) {
   let topic = req.session.topic;
   let respons = {};
-  let results = JSON.parse(fs.readFileSync(`public/data/topic${topic}.json`, 'utf8'));
+  let results = JSON.parse(
+    fs.readFileSync(`public/data/topic${topic}.json`, "utf8")
+  );
   res.send(200, results);
-
-
 });
-
-
 
 router.get("/api/consent", function(req, res) {
   // 0 is low 1 is high 2 is control //
@@ -101,26 +98,28 @@ router.get("/api/consent", function(req, res) {
   }
 });
 
-router.post("/api/prestudy",function(req,res){
+router.post("/api/prestudy", function(req, res) {
   let token = req.session.userid;
   let data = req.body;
   let topic = req.session.topic;
   console.log(data);
   data["topic"] = topic;
   Response.findOneAndUpdate(
-      {usertoken:token},
-      {
-        $push :  {prestudy: data}
-      },
-      function(err,doc){
-        if (err) {console.log(err); return res.send(500,{error:err})};
-        return res.send(200,`succesfully saved pre study for topic ${topic}`)
+    { usertoken: token },
+    {
+      $push: { prestudy: data }
+    },
+    function(err, doc) {
+      if (err) {
+        console.log(err);
+        return res.send(500, { error: err });
       }
-  )
-
+      return res.send(200, `succesfully saved pre study for topic ${topic}`);
+    }
+  );
 });
 
-router.post("/api/study",function(req,res){
+router.post("/api/study", function(req, res) {
   let token = req.session.userid;
   let data = req.body;
   console.log(data);
@@ -129,33 +128,37 @@ router.post("/api/study",function(req,res){
 
   data["topic"] = topic;
   Response.findOneAndUpdate(
-      {usertoken:token},
-      {
-        $push : {study:data}
-      },
-      function(err,doc){
-        if (err) {return res.send(500,{error:err})}
-        return res.send(200,`successfully saved study for topic ${topic}`)
+    { usertoken: token },
+    {
+      $push: { study: data }
+    },
+    function(err, doc) {
+      if (err) {
+        return res.send(500, { error: err });
       }
-  )
+      return res.send(200, `successfully saved study for topic ${topic}`);
+    }
+  );
 });
 
-router.post("/api/decision",function(req,res){
+router.post("/api/decision", function(req, res) {
   let token = req.session.userid;
   let data = req.body;
   console.log(data);
   let topic = req.session.topic;
   data["topic"] = topic;
-    Response.findOneAndUpdate(
-        {usertoken:token},
-        {
-            $push : {decision:data}
-        },
-        function(err,doc){
-            if (err) {return res.send(500,{error:err})}
-            return res.send(200,`successfully saved decision for topic ${topic}`)
-        }
-    )
+  Response.findOneAndUpdate(
+    { usertoken: token },
+    {
+      $push: { decision: data }
+    },
+    function(err, doc) {
+      if (err) {
+        return res.send(500, { error: err });
+      }
+      return res.send(200, `successfully saved decision for topic ${topic}`);
+    }
+  );
 });
 
 router.post("/api/pre", function(req, res) {
@@ -183,42 +186,52 @@ router.get("/", function(req, res) {
   }
 });
 
-
 router.get("/consent", function(req, res) {
-    if (req.session.completed) {
-        res.render("debrief.html");
-    } else {
-        res.render("consent.html");
-    }
+  if (req.session.completed) {
+    res.render("debrief.html");
+  } else {
+    res.render("consent.html");
+  }
+});
+
+router.get("/instructions", function(req, res) {
+  if (req.session.completed) {
+    res.render("debrief.html");
+  } else {
+    res.render("instructions.html");
+  }
+});
+
+router.get("/preforms", function(req, res) {
+  res.render("preforms.html");
+});
+
+router.get("/postforms", function(req, res) {
+  res.render("postforms.html");
 });
 
 router.get("/study", function(req, res) {
   res.render("study.html");
 });
 
-router.get("/prestudy",function(req,res){
+router.get("/prestudy", function(req, res) {
   res.render("prestudy.html");
 });
 
-router.get("/decide",function(req,res){
-  res.render("decide.html")
+router.get("/decide", function(req, res) {
+  res.render("decide.html");
 });
 
-
-router.get("/next",function(req,res){
+router.get("/next", function(req, res) {
   req.session.topic += 1;
-  if (req.session.topic >2){
-    res.redirect("/debrief")
+  if (req.session.topic > 2) {
+    res.redirect("/debrief");
   } else {
-    res.redirect("/prestudy")
+    res.redirect("/instructions");
   }
 });
-
-
 
 router.get("/debrief", function(req, res) {
   res.render("debrief.html");
 });
 module.exports = router;
-
-

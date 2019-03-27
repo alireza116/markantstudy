@@ -34,9 +34,9 @@ port = process.env.PORT || 3005;
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 app.use(cors());
-app.use("/", express.static(__dirname + "/public"));
-app.use("/", routes);
 
+app.use("/", routes);
+app.use("/", express.static(__dirname + "/public"));
 var router = express.Router();
 
 app.use("/api", router);
