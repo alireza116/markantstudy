@@ -22,6 +22,12 @@ html, body {
 #topic h2 {
     text-align: center;
 }
+
+
+#topic p {
+    text-align: center;
+    font-size: x-large;
+}
 #prior {
     width: 100%;
     height: 50%;
@@ -43,7 +49,7 @@ html, body {
     /*height: 1em;*/
 /*}*/
 
-input[type='radio'] { transform: scale(2);
+input[type='radio'] { transform: scale(1.2);
     color:white;
 }
 input[type='radio']:after {

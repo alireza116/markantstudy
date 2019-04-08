@@ -225,9 +225,9 @@ router.get("/decide", function(req, res) {
 router.get("/next", function(req, res) {
   req.session.topic += 1;
   if (req.session.topic > 2) {
-    res.redirect("/debrief");
+    res.redirect("/postforms");
   } else {
-    res.redirect("/instructions");
+    res.redirect("/prestudy");
   }
 });
 
