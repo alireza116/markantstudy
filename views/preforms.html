@@ -24,11 +24,7 @@
 <body>
             <div class="container bg-light">
                 <form class="questions">
-                    <!-- <h4>Please take note of your user id, you need it for finalizing Mturk payment: <br>
-                        <br>
-                        <span id="token"></span></h4>
-                    <hr> -->
-                    <h5>Please answer these questions</h5>
+                    <h1>Please answer these questions</h1>
                     <div>
                         What is your gender?
                     </div>
@@ -164,9 +160,10 @@
 
                     <hr>
 
-                    emotional state: This question consists of a number of words that describe different feelings and emotions.
-                    Read each item and then mark the appropriate answer in the space next to that word. Indicate to what
-                    extent you have felt like this in the right now. Use the following scale to record your answers.
+                    Emotional state: This question consists of a number of words that describe different feelings and emotions.
+                    Read each item and then mark the appropriate answer in the space next to that word. <br>
+
+                    <span style="font-weight: 600">Indicate to what extent you have felt like this in the right now. Use the following scale to record your answers. </span>
 
                     <hr>
                     <div class="row" style="background-color: lightgray; margin-bottom:7px; font-size:small;">
@@ -591,15 +588,17 @@
     $("#presubmit").click(function(event){
         event.preventDefault();
         var data = $(".questions").serializeArray();
-        window.location.assign("/instructions");
         console.log(data);
+//        window.location.assign("/instructions");
+//        console.log(data);
         if (!(+data[1]["value"] > 18 && +data[1]["value"] < 99)) {
             alert("you need to be older than 18 years old and less than 99 years to continue this study")
         }
-        else if (data.length === 6) {
+        else if (data.length === 14) {
             $.post("/api/pre",data=data,
                 success=function(d){
                     console.log(d);
+                    console.log("success");
                     window.location.assign("/instructions");
                 }
             )

@@ -20,9 +20,10 @@
                     <div id="complete">
                         <h5>Thank you for your time.</h5>
                         <p>Please enter this token as your completion record in MTurk: </p>
+
                         <p>This token is the proof of the completion of this study: </p>
 
-                        <p id = "token" style="font-weight: bold">
+                        <p id = "token" style="font-weight: bold; font-size: xx-large">
                         </p>
                         <p>Please keep the browser open so you can maintain the token. <br>
                             Payment is contingent upon entering this token.
@@ -31,6 +32,26 @@
 
                             If you have any questions about this study or the purpose, please contact Alireza Karduni akarduni@uncc.edu.
                         </p>
+                        <hr>
+                        <form >
+                            Will you allow us to use the data from this survey for our researrch?
+                            <fieldset class="form-group" style="background: #f9f9f9;">
+                                <div class="form-check form-check-inline" style="width:25%">
+                                    <label class="form-check-label">
+                                        Yes
+                                        <input class="form-check-input" type="radio" name="permission" id="permission1" checked value="yes">
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline" style="width:25%">
+                                    <label class="form-check-label">
+                                        No
+                                        <input class="form-check-input" type="radio" name="permission" id="permission2" value="no">
+                                    </label>
+                                </div>
+                            </fieldset>
+                            <button type="submit" class="btn btn-secondary btn-sm" id="presubmit">Submit</button>
+
+                        </form>
                     </div>
 
     </div>
@@ -41,5 +62,7 @@
     $.get("/api/userinfo",function(data){
         $("#token").text(data.token);
     })
+
+
 </script>
 </html>

@@ -7,3 +7,12 @@ html, body {
     height: 100%;
     margin:0;
 }
+
+.question-container .container {
+    height:100% !important;
+}
+
+.questions{
+    /*height: 80%;*/
+padding: 50px;
+}

@@ -27,7 +27,8 @@ const responseSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  questionnaire: Schema.Types.Mixed,
+    prequestionnaire: Schema.Types.Mixed,
+    postquestionnaire: Schema.Types.Mixed,
   prestudy: [Schema.Types.Mixed],
   study: [Schema.Types.Mixed],
   decision: [Schema.Types.Mixed],
@@ -168,7 +169,7 @@ router.post("/api/pre", function(req, res) {
   Response.findOneAndUpdate(
     { usertoken: token, questionnaire: { $exists: false } },
     {
-      questionnaire: data
+      prequestionnaire: data
     },
     function(err, doc) {
       if (err) return res.send(500, { error: err });
@@ -176,6 +177,23 @@ router.post("/api/pre", function(req, res) {
       return res.send("successfully saved!");
     }
   );
+});
+
+router.post("/api/post", function(req, res) {
+    let token = req.session.userid;
+    let data = req.body;
+    console.log(data);
+    Response.findOneAndUpdate(
+        { usertoken: token, questionnaire: { $exists: false } },
+        {
+            postquestionnaire: data
+        },
+        function(err, doc) {
+            if (err) return res.send(500, { error: err });
+            console.log("yeaah");
+            return res.send("successfully saved!");
+        }
+    );
 });
 
 router.get("/", function(req, res) {

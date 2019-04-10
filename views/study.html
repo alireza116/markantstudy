@@ -53,34 +53,37 @@
     var decisions = [];
     $.get("/api/data").then(function(data){
         $("#exampleModal").modal();
-        var question = data["title"];
-        d3.select("#topic").select("h2").text("Topic: " + question);
-        var dataEmotion = data["data"].slice();
-        dataEmotion.sort(function(a,b){
-            return +b["sentiment"] > +a["sentiment"]
-        });
-
-        var index = 0;
-        var message = d3.select("#message").select(".callout");
-        message.text(dataEmotion[index]["text"]);
-        decisions.push(Date.now());
-        d3.select("#continue").on("click",function(){
-            index +=1 ;
-           message.text("...");
-           setTimeout(function(){
-                    message.text(' "' + dataEmotion[index]["text"] + '"');
-                    decisions.push(Date.now());
-               ; }, 800);
-
-        });
-
-        d3.select("#decide").on("click",function(){
-            $.post("/api/study",{dates:decisions},success=function(result){
-                console.log(result);
-                window.location.assign("/decide");
+        $('#exampleModal').on('hidden.bs.modal', function () {
+            var question = data["title"];
+            d3.select("#topic").select("h2").text("Topic: " + question);
+            var dataEmotion = data["data"].slice();
+            dataEmotion.sort(function(a,b){
+                return +b["sentiment"] > +a["sentiment"]
             });
 
-        })
+            var index = 0;
+            var message = d3.select("#message").select(".callout");
+            message.text(dataEmotion[index]["text"]);
+            decisions.push(Date.now());
+            d3.select("#continue").on("click",function(){
+                index +=1 ;
+                message.text("...");
+                setTimeout(function(){
+                    message.text(' "' + dataEmotion[index]["text"] + '"');
+                    decisions.push(Date.now());
+                    ; }, 800);
+
+            });
+
+            d3.select("#decide").on("click",function(){
+                $.post("/api/study",{dates:decisions},success=function(result){
+                    console.log(result);
+                    window.location.assign("/decide");
+                });
+
+            })
+        });
+
     })
 </script>
 </body>
