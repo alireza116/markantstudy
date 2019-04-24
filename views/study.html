@@ -57,9 +57,9 @@
             var question = data["title"];
             d3.select("#topic").select("h2").text("Topic: " + question);
             var dataEmotion = data["data"].slice();
-            dataEmotion.sort(function(a,b){
-                return +b["sentiment"] > +a["sentiment"]
-            });
+//            dataEmotion.sort(function(a,b){
+//                return +b["sentiment"] > +a["sentiment"]
+//            });
 
             var index = 0;
             var message = d3.select("#message").select(".callout");
@@ -70,6 +70,7 @@
                 message.text("...");
                 setTimeout(function(){
                     message.text(' "' + dataEmotion[index]["text"] + '"');
+                    console.log(dataEmotion[index]["sentiment"]);
                     decisions.push(Date.now());
                     ; }, 800);
 

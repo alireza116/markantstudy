@@ -8,11 +8,14 @@ html, body {
     margin:0;
 }
 
-.question-container .container {
-    height:100% !important;
+.question-container.container {
+    /*height:100%;*/
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .questions{
     /*height: 80%;*/
-padding: 50px;
+padding: 100px;
 }

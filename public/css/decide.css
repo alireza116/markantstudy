@@ -19,11 +19,14 @@ html, body {
 }
 .container.main {
     height:100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 
 }
 
 #decisions{
-    height: 50%;
+    height: 30%;
 }
 
 #message h2{

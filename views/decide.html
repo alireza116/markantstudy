@@ -33,18 +33,17 @@
 
             $.post("/api/decision",{"vote":"yes"},success=function(result){
                 console.log(result);
-                window.location.assign("/next");
+                window.location.assign("/poststudy");
             });
             console.log(decisions);
         });
         d3.select("#no").on("click",function(){
             $.post("/api/decision",{"vote":"no"},success=function(result){
                 console.log(result);
-                window.location.assign("/next");
+                window.location.assign("/poststudy");
             });
         });
     })
-
 </script>
 </body>
 </html>

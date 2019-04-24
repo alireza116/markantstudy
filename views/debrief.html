@@ -28,9 +28,11 @@
                         <p>Please keep the browser open so you can maintain the token. <br>
                             Payment is contingent upon entering this token.
                         </p>
-                        <p> This study was designed for us to understand whether different amounts of emotion and evidence in text affects your decision making <br>
+                        <p> What you should know about this study: <br>
+                            The purpose of this study is to understand the effects of exposure to different types of messages on users’ decision making on different topics. For each topic you had the opportunity to read a series of comments that had different emotional and factual contents. We are interested to know whether including texts with strong emotional affect and factual text influence the time a participant takes to come to a decision.
+                            <br>
+                            The findings of this study will be important for highlighting the complexity of our media ecosystem, and will be useful in many different disciplines, including media and journalism studies, education, and computer science. Ultimately, using the findings of this study, we will be able to create new guidelines on how textual information might affect opinions and ultimately policies.
 
-                            If you have any questions about this study or the purpose, please contact Alireza Karduni akarduni@uncc.edu.
                         </p>
                         <hr>
                         <form >
@@ -49,7 +51,7 @@
                                     </label>
                                 </div>
                             </fieldset>
-                            <button type="submit" class="btn btn-secondary btn-sm" id="presubmit">Submit</button>
+                            <button type="submit" class="btn btn-secondary btn-sm" id="allowsubmit">Submit</button>
 
                         </form>
                     </div>
@@ -62,6 +64,18 @@
     $.get("/api/userinfo",function(data){
         $("#token").text(data.token);
     })
+
+    $("#allowsubmit").click(function(){
+        event.preventDefault();
+        var data = $("fieldset").serializeArray()
+        console.log(data);
+        $.post("/api/permission",data[0],success=function(result){
+            console.log(result);
+//            window.location.assign("/next");
+            alert("thank you!");
+        });
+    })
+
 
 
 </script>
