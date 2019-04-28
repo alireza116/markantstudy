@@ -127,19 +127,27 @@ router.get("/api/data", function(req, res) {
     if (stance === 1){
 
         let highClaimFor = forTexts.filter(function(d){
-            return +d["claim"] > claimTopQuant
+            return +d["claim"] >= 3
         });
         let lowClaimAgainst = againstTexts.filter(function(d){
-            return +d["claim"] < claimLowQuant
+            return +d["claim"] < 3
         });
 
         if (block === 0){
             let zipped = zip(highClaimFor,lowClaimAgainst);
             let weaved = [];
-            zipped.forEach(function(l){
-                weaved.push(l[0]);
-                weaved.push(l[1]);
-            });
+            if (topic % 2===0){
+                zipped.forEach(function(l){
+                    weaved.push(l[0]);
+                    weaved.push(l[1]);
+                });
+            } else {
+                zipped.forEach(function(l){
+                    weaved.push(l[1]);
+                    weaved.push(l[0]);
+                });
+            }
+
 
             results["data"] = weaved;
             res.status(200).send(results);
@@ -147,13 +155,24 @@ router.get("/api/data", function(req, res) {
             let minLength = highClaimFor.length < lowClaimAgainst.length ? highClaimFor : lowClaimAgainst;
             let maxLEngth = highClaimFor.length > lowClaimAgainst.length ? highClaimFor : lowClaimAgainst;
             let weaved = []
-            let i,j,temparray,chunk = 5;
-            for (i=0,j=minLength.length; i<j; i+=chunk) {
-                temparray = highClaimFor.slice(i,i+chunk);
-                weaved = weaved.concat(temparray);
-                temparray = lowClaimAgainst.slice(i,i+chunk);
-                weaved = weaved.concat(temparray);
+            let i,j,temparray,chunk = 10;
+            if (topic % 2 ===0){
+                for (i=0,j=minLength.length; i<j; i+=chunk) {
+                    temparray = highClaimFor.slice(i,i+chunk);
+                    weaved = weaved.concat(temparray);
+                    temparray = lowClaimAgainst.slice(i,i+chunk);
+                    weaved = weaved.concat(temparray);
+                }
+            } else {
+                for (i=0,j=minLength.length; i<j; i+=chunk) {
+                    temparray = lowClaimAgainst.slice(i,i+chunk);
+                    weaved = weaved.concat(temparray);
+                    temparray = highClaimFor.slice(i,i+chunk);
+                    weaved = weaved.concat(temparray);
+
+                }
             }
+
             results["data"] = weaved;
             res.status(200).send(results);
         }
@@ -161,31 +180,49 @@ router.get("/api/data", function(req, res) {
     else if (stance === 0){
 
         let highClaimAgainst = againstTexts.filter(function(d){
-            return +d["claim"] > claimTopQuant
+            return +d["claim"] >= 3
         });
         let lowClaimFor = forTexts.filter(function(d){
-            return +d["claim"] < claimLowQuant
+            return +d["claim"] < 3
         });
         if (block ===0){
             let zipped = zip(lowClaimFor,highClaimAgainst);
             let weaved = [];
-            zipped.forEach(function(l){
-                weaved.push(l[0]);
-                weaved.push(l[1]);
-            });
-
+            if (topic % 2 === 0){
+                zipped.forEach(function(l){
+                    weaved.push(l[0]);
+                    weaved.push(l[1]);
+                });
+            } else {
+                zipped.forEach(function(l){
+                    weaved.push(l[1]);
+                    weaved.push(l[0]);
+                });
+            }
             results["data"] = weaved;
             res.status(200).send(results);
         } else if (block ===1) {
             let minLength = highClaimAgainst.length < lowClaimFor.length ? highClaimAgainst : lowClaimFor;
             let weaved = [];
-            let i,j,temparray,chunk = 5;
-            for (i=0,j=minLength.length; i<j; i+=chunk) {
-                temparray = lowClaimFor.slice(i,i+chunk);
-                weaved = weaved.concat(temparray);
-                temparray = highClaimAgainst.slice(i,i+chunk);
-                weaved = weaved.concat(temparray);
+            let i,j,temparray,chunk = 10;
+            if (topic % 2 ===0){
+                for (i=0,j=minLength.length; i<j; i+=chunk) {
+                    temparray = highClaimAgainst.slice(i,i+chunk);
+                    weaved = weaved.concat(temparray);
+                    temparray = lowClaimFor.slice(i,i+chunk);
+                    weaved = weaved.concat(temparray);
+
+                }
+            } else {
+                for (i=0,j=minLength.length; i<j; i+=chunk) {
+                    temparray = lowClaimFor.slice(i,i+chunk);
+                    weaved = weaved.concat(temparray);
+
+                    temparray = highClaimAgainst.slice(i,i+chunk);
+                    weaved = weaved.concat(temparray);
+                }
             }
+
             results["data"] = weaved;
             res.status(200).send(results);
         }
@@ -360,7 +397,7 @@ router.post("/api/post", function(req, res) {
 router.post("/api/permission",function(req,res){
     let token = req.session.userid;
     let data = req.body;
-    // console.log(data);
+    console.log(data);
     Response.findOneAndUpdate(
         { usertoken: token },
         data,
