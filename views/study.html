@@ -63,17 +63,20 @@
 
             var index = 0;
             var message = d3.select("#message").select(".callout");
-            message.text(dataEmotion[index]["text"]);
+            message.text(' "' + dataEmotion[index]["text"] + '"');
             decisions.push(Date.now());
             d3.select("#continue").on("click",function(){
                 index +=1 ;
                 message.text("...");
-                setTimeout(function(){
-                    message.text(' "' + dataEmotion[index]["text"] + '"');
-                    console.log(dataEmotion[index]["sentiment"]);
-                    decisions.push(Date.now());
-                    ; }, 800);
-
+                if (index < dataEmotion.length) {
+                    setTimeout(function(){
+                        message.text(' "' + dataEmotion[index]["text"] + '"');
+                        console.log(dataEmotion[index]["sentiment"]);
+                        decisions.push(Date.now());
+                        ; }, 800);
+                } else{
+                    message.text("you have seen all the messages please click on decide")
+                }
             });
 
             d3.select("#decide").on("click",function(){

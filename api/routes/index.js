@@ -72,6 +72,8 @@ const allData = JSON.parse(
     fs.readFileSync(`public/data/finalData.json`, "utf8")
 );
 
+const numTopics = 3;
+
 const Response = mongoose.model("userResponse", responseSchema);
 
 router.get("/api/userinfo", function(req, res) {
@@ -407,7 +409,7 @@ router.post("/api/permission",function(req,res){
             return res.send("successfully saved!");
         }
     );
-})
+});
 
 router.get("/", function(req, res) {
   if (req.session.completed) {
@@ -482,7 +484,7 @@ router.get("/decide", function(req, res) {
 
 router.get("/next", function(req, res) {
   req.session.topic += 1;
-  if (req.session.topic > 3) {
+  if (req.session.topic > numTopics-1) {
     req.session.completed = true;
     res.redirect("/postforms");
   } else {
